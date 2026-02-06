@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Prime Car Accessories</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0b0b0b;
+    color:#fff;
+}
+
+/* HEADER */
+header{
+    background:linear-gradient(135deg,#b30000,#000);
+    padding:25px;
+    text-align:center;
+}
+
+header h1{
+    font-size:36px;
+    letter-spacing:2px;
+}
+
+header p{
+    color:#ddd;
+    margin-top:5px;
+}
+
+/* CONTAINER */
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+/* SERVICES */
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+}
+
+.service-box{
+    background:#141414;
+    border:2px solid #2a2a2a;
+    padding:20px;
+    border-radius:12px;
+    cursor:pointer;
+    transition:0.3s;
+    position:relative;
+}
+
+.service-box:hover{
+    transform:scale(1.04);
+    border-color:#ff1a1a;
+}
+
+.service-box.active{
+    border-color:#00ff88;
+    box-shadow:0 0 15px #00ff88;
+}
+
+.service-box h3{
+    color:#ff2b2b;
+    margin-bottom:10px;
+}
+
+.service-box p{
+    color:#ccc;
+    font-size:14px;
+}
+
+.tick{
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:22px;
+    color:#00ff88;
+    display:none;
+}
+
+.service-box.active .tick{
+    display:block;
+}
+
+/* CONFIRM SECTION */
+.confirm-box{
+    margin-top:40px;
+    background:#111;
+    border:2px dashed #ff2b2b;
+    padding:25px;
+    border-radius:12px;
+}
+
+.confirm-box h2{
+    margin-bottom:15px;
+}
+
+.selected-services{
+    margin-bottom:20px;
+    color:#ccc;
+}
+
+/* BUTTON */
+button{
+    background:#25D366;
+    border:none;
+    padding:15px 30px;
+    font-size:18px;
+    border-radius:50px;
+    cursor:pointer;
+    color:#000;
+    font-weight:600;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* FOOTER */
+footer{
+    background:#000;
+    text-align:center;
+    padding:15px;
+    color:#777;
+    margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>PRIME CAR ACCESSORIES</h1>
+    <p>Custom • Performance • Style • Protection</p>
+</header>
+
+<div class="container">
+
+<h2 style="margin-bottom:20px;">Select Your Services</h2>
+
+<div class="services" id="services">
+
+    <div class="service-box" data-service="Custom Wheels & Tires">
+        <span class="tick">✔</span>
+        <h3>Custom Wheels & Tires</h3>
+        <p>Premium alloys, sports wheels & tire upgrades</p>
+    </div>
+
+    <div class="service-box" data-service="Performance Parts">
+        <span class="tick">✔</span>
+        <h3>Performance Parts</h3>
+        <p>Exhausts, filters & engine upgrades</p>
+    </div>
+
+    <div class="service-box" data-service="LED & HID Lighting">
+        <span class="tick">✔</span>
+        <h3>LED & HID Lighting</h3>
+        <p>Headlights, DRLs & ambient lighting</p>
+    </div>
+
+    <div class="service-box" data-service="Car Audio Systems">
+        <span class="tick">✔</span>
+        <h3>Car Audio Systems</h3>
+        <p>Speakers, subwoofers & infotainment</p>
+    </div>
+
+    <div class="service-box" data-service="Interior Accessories">
+        <span class="tick">✔</span>
+        <h3>Interior Accessories</h3>
+        <p>Seat covers, mats & custom interiors</p>
+    </div>
+
+    <div class="service-box" data-service="Exterior Accessories">
+        <span class="tick">✔</span>
+        <h3>Exterior Accessories</h3>
+        <p>Body kits, spoilers & styling</p>
+    </div>
+
+    <div class="service-box" data-service="Window Tinting">
+        <span class="tick">✔</span>
+        <h3>Window Tinting</h3>
+        <p>Heat control & privacy films</p>
+    </div>
+
+    <div class="service-box" data-service="Detailing & Car Care">
+        <span class="tick">✔</span>
+        <h3>Detailing & Car Care</h3>
+        <p>Polishing, ceramic coating & wash</p>
+    </div>
+
+</div>
+
+<div class="confirm-box">
+    <h2>Confirmed Services</h2>
+    <div class="selected-services" id="selectedServices">
+        No services selected yet.
+    </div>
+
+    <button onclick="sendWhatsApp()">Confirm & Send on WhatsApp</button>
+</div>
+
+</div>
+
+<footer>
+    © 2026 Prime Car Accessories | Owner: Lakhwinder Singh (Happy)
+</footer>
+
+<script>
+const serviceBoxes = document.querySelectorAll('.service-box');
+const selectedServicesDiv = document.getElementById('selectedServices');
+
+let selectedServices = [];
+
+serviceBoxes.forEach(box=>{
+    box.addEventListener('click',()=>{
+        const service = box.getAttribute('data-service');
+
+        if(selectedServices.includes(service)){
+            selectedServices = selectedServices.filter(s=>s!==service);
+            box.classList.remove('active');
+        }else{
+            selectedServices.push(service);
+            box.classList.add('active');
+        }
+
+        updateSelected();
+    });
+});
+
+function updateSelected(){
+    if(selectedServices.length === 0){
+        selectedServicesDiv.innerHTML = "No services selected yet.";
+    }else{
+        selectedServicesDiv.innerHTML = selectedServices.map(s=>"✔ "+s).join("<br>");
+    }
+}
+
+function sendWhatsApp(){
+    if(selectedServices.length === 0){
+        alert("Please select at least one service");
+        return;
+    }
+
+    let message = "Hello Prime Car Accessories,%0A%0AI want the following services:%0A";
+    selectedServices.forEach(s=>{
+        message += "• " + s + "%0A";
+    });
+
+    message += "%0AThank you!";
+
+    window.open(`https://wa.me/919596850672?text=${message}`, '_blank');
+}
+</script>
+
+</body>
+</html>
