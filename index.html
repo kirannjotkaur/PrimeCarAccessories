@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Prime Car Accessories</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Car Accessories</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -12,7 +12,11 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -20,250 +24,257 @@ body{
     color:#fff;
 }
 
-/* HEADER */
-header{
-    background:linear-gradient(135deg,#b30000,#000);
-    padding:25px;
+/* NAVBAR */
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    background:rgba(0,0,0,0.9);
+    padding:15px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+}
+
+nav h2{
+    color:#ff2b2b;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:25px;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:#ccc;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:#ff2b2b;
+}
+
+/* HERO */
+.hero{
+    height:100vh;
+    background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1493238792000-8113da705763') center/cover;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h1{
+    font-size:50px;
+    color:#fff;
+}
+
+.hero span{
+    color:#ff2b2b;
+}
+
+.hero p{
+    margin:20px 0;
+    color:#ddd;
+    max-width:600px;
+}
+
+.btn{
+    background:#ff2b2b;
+    padding:15px 35px;
+    border:none;
+    border-radius:50px;
+    color:#fff;
+    font-weight:600;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#b30000;
+    transform:scale(1.05);
+}
+
+/* SECTION */
+section{
+    padding:80px 50px;
     text-align:center;
 }
 
-header h1{
-    font-size:36px;
-    letter-spacing:2px;
-}
-
-header p{
-    color:#ddd;
-    margin-top:5px;
-}
-
-/* CONTAINER */
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 20px;
+.section-title{
+    font-size:32px;
+    margin-bottom:40px;
+    color:#ff2b2b;
 }
 
 /* SERVICES */
 .services{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:20px;
+    gap:25px;
 }
 
-.service-box{
+.card{
     background:#141414;
-    border:2px solid #2a2a2a;
-    padding:20px;
-    border-radius:12px;
-    cursor:pointer;
-    transition:0.3s;
-    position:relative;
-}
-
-.service-box:hover{
-    transform:scale(1.04);
-    border-color:#ff1a1a;
-}
-
-.service-box.active{
-    border-color:#00ff88;
-    box-shadow:0 0 15px #00ff88;
-}
-
-.service-box h3{
-    color:#ff2b2b;
-    margin-bottom:10px;
-}
-
-.service-box p{
-    color:#ccc;
-    font-size:14px;
-}
-
-.tick{
-    position:absolute;
-    top:15px;
-    right:15px;
-    font-size:22px;
-    color:#00ff88;
-    display:none;
-}
-
-.service-box.active .tick{
-    display:block;
-}
-
-/* CONFIRM SECTION */
-.confirm-box{
-    margin-top:40px;
-    background:#111;
-    border:2px dashed #ff2b2b;
     padding:25px;
     border-radius:12px;
+    transition:0.3s;
+    border:1px solid #222;
 }
 
-.confirm-box h2{
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#ff2b2b;
+}
+
+.card h3{
+    color:#fff;
     margin-bottom:15px;
 }
 
-.selected-services{
-    margin-bottom:20px;
-    color:#ccc;
+.card p{
+    color:#bbb;
+    font-size:14px;
+    margin-bottom:15px;
 }
 
-/* BUTTON */
-button{
-    background:#25D366;
-    border:none;
-    padding:15px 30px;
-    font-size:18px;
-    border-radius:50px;
-    cursor:pointer;
-    color:#000;
+.card a{
+    text-decoration:none;
+    color:#ff2b2b;
     font-weight:600;
+}
+
+/* ABOUT */
+.about{
+    max-width:800px;
+    margin:auto;
+    color:#ccc;
+    line-height:1.8;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:12px;
     transition:0.3s;
 }
 
-button:hover{
+.gallery img:hover{
     transform:scale(1.05);
+}
+
+/* CONTACT */
+.contact{
+    background:#111;
+    padding:60px 20px;
+}
+
+.contact p{
+    margin-bottom:20px;
+    color:#ccc;
 }
 
 /* FOOTER */
 footer{
     background:#000;
+    padding:20px;
     text-align:center;
-    padding:15px;
     color:#777;
-    margin-top:40px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>PRIME CAR ACCESSORIES</h1>
-    <p>Custom • Performance • Style • Protection</p>
-</header>
+<nav>
+    <h2>Prime Car</h2>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
-<div class="container">
-
-<h2 style="margin-bottom:20px;">Select Your Services</h2>
-
-<div class="services" id="services">
-
-    <div class="service-box" data-service="Custom Wheels & Tires">
-        <span class="tick">✔</span>
-        <h3>Custom Wheels & Tires</h3>
-        <p>Premium alloys, sports wheels & tire upgrades</p>
-    </div>
-
-    <div class="service-box" data-service="Performance Parts">
-        <span class="tick">✔</span>
-        <h3>Performance Parts</h3>
-        <p>Exhausts, filters & engine upgrades</p>
-    </div>
-
-    <div class="service-box" data-service="LED & HID Lighting">
-        <span class="tick">✔</span>
-        <h3>LED & HID Lighting</h3>
-        <p>Headlights, DRLs & ambient lighting</p>
-    </div>
-
-    <div class="service-box" data-service="Car Audio Systems">
-        <span class="tick">✔</span>
-        <h3>Car Audio Systems</h3>
-        <p>Speakers, subwoofers & infotainment</p>
-    </div>
-
-    <div class="service-box" data-service="Interior Accessories">
-        <span class="tick">✔</span>
-        <h3>Interior Accessories</h3>
-        <p>Seat covers, mats & custom interiors</p>
-    </div>
-
-    <div class="service-box" data-service="Exterior Accessories">
-        <span class="tick">✔</span>
-        <h3>Exterior Accessories</h3>
-        <p>Body kits, spoilers & styling</p>
-    </div>
-
-    <div class="service-box" data-service="Window Tinting">
-        <span class="tick">✔</span>
-        <h3>Window Tinting</h3>
-        <p>Heat control & privacy films</p>
-    </div>
-
-    <div class="service-box" data-service="Detailing & Car Care">
-        <span class="tick">✔</span>
-        <h3>Detailing & Car Care</h3>
-        <p>Polishing, ceramic coating & wash</p>
-    </div>
-
+<div class="hero" id="home">
+    <h1>Drive With <span>Style</span></h1>
+    <p>Premium accessories, performance upgrades and professional installation for your car.</p>
+    <a href="https://wa.me/919596850672" class="btn">Book on WhatsApp</a>
 </div>
 
-<div class="confirm-box">
-    <h2>Confirmed Services</h2>
-    <div class="selected-services" id="selectedServices">
-        No services selected yet.
+<section id="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="services">
+        <div class="card">
+            <h3>Custom Wheels</h3>
+            <p>Premium alloy wheels and tire upgrades.</p>
+            <a href="https://wa.me/919596850672">Get Quote →</a>
+        </div>
+        <div class="card">
+            <h3>Lighting Upgrades</h3>
+            <p>LED, HID & ambient lighting installation.</p>
+            <a href="https://wa.me/919596850672">Get Quote →</a>
+        </div>
+        <div class="card">
+            <h3>Interior Customization</h3>
+            <p>Seat covers, mats and luxury interiors.</p>
+            <a href="https://wa.me/919596850672">Get Quote →</a>
+        </div>
+        <div class="card">
+            <h3>Car Detailing</h3>
+            <p>Polishing, ceramic coating and protection.</p>
+            <a href="https://wa.me/919596850672">Get Quote →</a>
+        </div>
     </div>
+</section>
 
-    <button onclick="sendWhatsApp()">Confirm & Send on WhatsApp</button>
-</div>
+<section id="about">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="about">
+        We provide premium quality car accessories with professional installation. 
+        Our mission is to enhance your car’s performance, comfort and style 
+        while maintaining affordable pricing and trusted service.
+    </div>
+</section>
 
-</div>
+<section id="gallery">
+    <h2 class="section-title">Gallery</h2>
+    <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1511910849309-0dffb3a9b8e7">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7">
+    </div>
+</section>
+
+<section class="contact" id="contact">
+    <h2 class="section-title">Contact Us</h2>
+    <p>Owner: Lakhwinder Singh (Happy)</p>
+    <p>Call / WhatsApp: +91 9596850672</p>
+    <a href="https://wa.me/919596850672" class="btn">Message Now</a>
+</section>
 
 <footer>
-    © 2026 Prime Car Accessories | Owner: Lakhwinder Singh (Happy)
+    © 2026 Prime Car Accessories | All Rights Reserved
 </footer>
 
-<script>
-const serviceBoxes = document.querySelectorAll('.service-box');
-const selectedServicesDiv = document.getElementById('selectedServices');
-
-let selectedServices = [];
-
-serviceBoxes.forEach(box=>{
-    box.addEventListener('click',()=>{
-        const service = box.getAttribute('data-service');
-
-        if(selectedServices.includes(service)){
-            selectedServices = selectedServices.filter(s=>s!==service);
-            box.classList.remove('active');
-        }else{
-            selectedServices.push(service);
-            box.classList.add('active');
-        }
-
-        updateSelected();
-    });
-});
-
-function updateSelected(){
-    if(selectedServices.length === 0){
-        selectedServicesDiv.innerHTML = "No services selected yet.";
-    }else{
-        selectedServicesDiv.innerHTML = selectedServices.map(s=>"✔ "+s).join("<br>");
-    }
-}
-
-function sendWhatsApp(){
-    if(selectedServices.length === 0){
-        alert("Please select at least one service");
-        return;
-    }
-
-    let message = "Hello Prime Car Accessories,%0A%0AI want the following services:%0A";
-    selectedServices.forEach(s=>{
-        message += "• " + s + "%0A";
-    });
-
-    message += "%0AThank you!";
-
-    window.open(`https://wa.me/919596850672?text=${message}`, '_blank');
-}
+</body>
+</html>
 </script>
 
 </body>
 </html>
+
