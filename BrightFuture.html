@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrightFuture Digital Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0f0f1a;
+color:#fff;
+line-height:1.6;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+z-index:1000;
+}
+
+nav h2{
+color:#8b5cf6;
+}
+
+nav ul{
+display:flex;
+gap:20px;
+list-style:none;
+}
+
+nav ul li a{
+color:#ccc;
+text-decoration:none;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+color:#8b5cf6;
+}
+
+section{
+padding:100px 20px;
+text-align:center;
+}
+
+.hero{
+background:linear-gradient(135deg,#1a1a40,#0f3460,#16213e);
+padding-top:150px;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.hero span{
+color:#8b5cf6;
+}
+
+.hero p{
+max-width:700px;
+margin:auto;
+color:#ccc;
+margin-bottom:30px;
+}
+
+.btn{
+background:#8b5cf6;
+padding:14px 30px;
+border-radius:50px;
+text-decoration:none;
+color:#fff;
+font-weight:600;
+transition:0.3s;
+display:inline-block;
+}
+
+.btn:hover{
+background:#6d28d9;
+transform:scale(1.05);
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+max-width:1100px;
+margin:auto;
+}
+
+.card{
+background:#14142b;
+padding:25px;
+border-radius:15px;
+border:1px solid #1f1f3d;
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+border-color:#8b5cf6;
+}
+
+.section-dark{
+background:#111827;
+}
+
+.price-card{
+background:#1f1f3d;
+padding:40px;
+border-radius:15px;
+border:2px solid #8b5cf6;
+}
+
+.price{
+font-size:36px;
+color:#8b5cf6;
+margin:20px 0;
+}
+
+.faq{
+max-width:800px;
+margin:auto;
+text-align:left;
+}
+
+.faq h4{
+margin-bottom:10px;
+color:#8b5cf6;
+}
+
+footer{
+background:#0a0a0f;
+padding:30px;
+text-align:center;
+color:#666;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:10px;
+}
+
+.hero h1{
+font-size:30px;
+}
+
+section{
+padding:70px 15px;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>BrightFuture</h2>
+<ul>
+<li><a href="#services">Services</a></li>
+<li><a href="#process">Process</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<h1>Build Your <span>Digital Presence</span></h1>
+<p>Professional websites for local businesses, startups and entrepreneurs. Affordable. Modern. Powerful.</p>
+<a href="https://wa.me/919596850672" class="btn">Start Your Website</a>
+</section>
+
+<section id="services">
+<h2>Our Services</h2>
+<div class="grid">
+<div class="card">
+<h3>Business Websites</h3>
+<p>Fully responsive modern websites tailored to your brand.</p>
+</div>
+<div class="card">
+<h3>E-Commerce Setup</h3>
+<p>Sell products online with payment integration.</p>
+</div>
+<div class="card">
+<h3>WhatsApp Integration</h3>
+<p>Direct booking and customer communication.</p>
+</div>
+<div class="card">
+<h3>SEO Basics</h3>
+<p>Optimized structure to help your site rank on Google.</p>
+</div>
+</div>
+</section>
+
+<section class="section-dark" id="process">
+<h2>How We Work</h2>
+<div class="grid">
+<div class="card">
+<h3>1. Consultation</h3>
+<p>We understand your business and goals.</p>
+</div>
+<div class="card">
+<h3>2. Design & Development</h3>
+<p>We create your professional website.</p>
+</div>
+<div class="card">
+<h3>3. Launch</h3>
+<p>We help you go live smoothly.</p>
+</div>
+<div class="card">
+<h3>4. Support</h3>
+<p>1 Month free support included.</p>
+</div>
+</div>
+</section>
+
+<section id="pricing">
+<h2>Pricing Plans</h2>
+<div class="grid">
+<div class="price-card">
+<h3>Basic</h3>
+<div class="price">₹4999</div>
+<p>5 Pages Website<br>Responsive Design<br>WhatsApp Integration<br>Contact Form<br>1 Month Support</p>
+<a href="https://wa.me/919596850672" class="btn">Get Started</a>
+</div>
+
+<div class="price-card">
+<h3>Premium</h3>
+<div class="price">₹7999</div>
+<p>Everything in Basic<br>SEO Setup<br>Google Map Integration<br>Business Email Setup<br>Priority Support</p>
+<a href="https://wa.me/919596850672" class="btn">Choose Premium</a>
+</div>
+</div>
+</section>
+
+<section class="section-dark">
+<h2>About the Founder</h2>
+<p>BrightFuture Digital Studio is founded by a passionate developer focused on helping small businesses grow through powerful digital presence. Our mission is to make professional websites affordable and accessible.</p>
+</section>
+
+<section>
+<h2>FAQ</h2>
+<div class="faq">
+<h4>How long does delivery take?</h4>
+<p>Usually 3–7 working days depending on project size.</p>
+
+<h4>Do I need technical knowledge?</h4>
+<p>No. We guide you completely through the process.</p>
+
+<h4>Is hosting included?</h4>
+<p>We provide hosting guidance and help you set it up.</p>
+</div>
+</section>
+
+<section id="contact">
+<h2>Ready to Build?</h2>
+<p>Let’s create something powerful for your business.</p>
+<a href="https://wa.me/919596850672" class="btn">Contact on WhatsApp</a>
+</section>
+
+<footer>
+© 2026 BrightFuture Digital Studio | All Rights Reserved
+</footer>
+
+</body>
+</html>
