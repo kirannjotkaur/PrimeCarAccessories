@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Moonstore | Website Development</title>
+
+<meta name="description" content="Moonstore builds modern websites for businesses, creators and startups.">
+
+<link rel="icon" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+scroll-behavior:smooth;
+}
+
+body{
+background:#0f0f14;
+color:white;
+}
+
+/* container */
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+/* navbar */
+
+header{
+position:sticky;
+top:0;
+background:rgba(15,15,20,0.7);
+backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,0.05);
+z-index:999;
+}
+
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:15px 0;
+}
+
+.logo img{
+height:45px;
+}
+
+nav{
+display:flex;
+align-items:center;
+}
+
+nav a{
+margin-left:30px;
+text-decoration:none;
+color:#ccc;
+font-weight:500;
+position:relative;
+}
+
+nav a:hover{
+color:white;
+}
+
+nav a::after{
+content:"";
+position:absolute;
+height:2px;
+width:0%;
+left:0;
+bottom:-5px;
+background:#ff2f92;
+transition:.3s;
+}
+
+nav a:hover::after{
+width:100%;
+}
+
+.menu{
+display:none;
+font-size:28px;
+cursor:pointer;
+}
+
+/* hero */
+
+.hero{
+padding:140px 0;
+text-align:center;
+background:radial-gradient(circle at top,#1b1b22,#0f0f14);
+}
+
+.hero h1{
+font-size:52px;
+font-family:"Space Grotesk";
+margin-bottom:20px;
+}
+
+.hero span{
+color:#ff2f92;
+}
+
+.hero p{
+max-width:650px;
+margin:auto;
+margin-bottom:40px;
+color:#bbb;
+}
+
+.btn{
+background:linear-gradient(90deg,#ff2f92,#ff6ab0);
+padding:14px 32px;
+border-radius:30px;
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.07);
+box-shadow:0 10px 30px rgba(255,47,146,.5);
+}
+
+/* trust */
+
+.trust{
+padding:100px 0;
+text-align:center;
+}
+
+.trust-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.trust-box{
+background:rgba(255,255,255,0.03);
+padding:30px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,0.08);
+transition:.3s;
+}
+
+.trust-box:hover{
+transform:translateY(-8px);
+}
+
+/* services */
+
+.services{
+padding:100px 0;
+text-align:center;
+}
+
+.service-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.service{
+background:rgba(255,255,255,0.03);
+padding:35px;
+border-radius:15px;
+border:1px solid rgba(255,255,255,0.06);
+transition:.3s;
+}
+
+.service:hover{
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+}
+
+/* pricing */
+
+.pricing{
+padding:100px 0;
+text-align:center;
+}
+
+.plan-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:rgba(255,255,255,0.03);
+padding:40px;
+border-radius:18px;
+border:1px solid rgba(255,255,255,0.07);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.price{
+font-size:36px;
+color:#ff2f92;
+margin:15px 0;
+font-weight:700;
+}
+
+/* process */
+
+.process{
+padding:100px 0;
+text-align:center;
+background:#121218;
+}
+
+/* CTA */
+
+.cta{
+padding:120px 0;
+text-align:center;
+}
+
+.cta h2{
+font-size:36px;
+margin-bottom:20px;
+}
+
+/* footer */
+
+footer{
+background:black;
+padding:25px;
+text-align:center;
+margin-top:60px;
+}
+
+/* floating button */
+
+.float{
+position:fixed;
+right:20px;
+bottom:20px;
+}
+
+.ig{
+background:linear-gradient(90deg,#ff2f92,#ff6ab0);
+padding:12px 20px;
+border-radius:30px;
+color:white;
+text-decoration:none;
+font-weight:600;
+}
+
+/* mobile */
+
+@media(max-width:768px){
+
+nav{
+display:none;
+flex-direction:column;
+background:#111;
+position:absolute;
+top:60px;
+right:0;
+width:200px;
+}
+
+nav a{
+padding:10px;
+}
+
+nav.active{
+display:flex;
+}
+
+.menu{
+display:block;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+<div class="logo">
+<img src="logo.png">
+</div>
+
+<div class="menu" onclick="toggleMenu()">☰</div>
+
+<nav id="nav">
+
+<a href="#">Home</a>
+<a href="#services">Services</a>
+<a href="#pricing">Pricing</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Build Your <span>Business Website</span></h1>
+
+<p>Moonstore creates modern websites for startups, creators and businesses.</p>
+
+<a class="btn" href="https://www.instagram.com/rema.iningamount/" target="_blank">
+Start Your Project
+</a>
+
+</div>
+
+</section>
+
+<section class="trust">
+
+<div class="container">
+
+<h2>Why Choose Moonstore</h2>
+
+<div class="trust-grid">
+
+<div class="trust-box">Fast Delivery</div>
+<div class="trust-box">Mobile Optimized</div>
+<div class="trust-box">Secure Websites</div>
+<div class="trust-box">Affordable Pricing</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="services" class="services">
+
+<div class="container">
+
+<h2>Services</h2>
+
+<div class="service-grid">
+
+<div class="service">Business Websites</div>
+<div class="service">Landing Pages</div>
+<div class="service">Startup Websites</div>
+<div class="service">Custom Web Apps</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="pricing" class="pricing">
+
+<div class="container">
+
+<h2>Pricing</h2>
+
+<div class="plan-grid">
+
+<div class="card">
+
+<h3>Starter</h3>
+
+<div class="price">₹4,999</div>
+
+<p>1 Page Website</p>
+<p>Mobile Friendly</p>
+<p>1 Month Support</p>
+
+</div>
+
+<div class="card">
+
+<h3>Business</h3>
+
+<div class="price">₹7,999</div>
+
+<p>3 Pages</p>
+<p>Modern UI</p>
+<p>SEO Setup</p>
+
+</div>
+
+<div class="card">
+
+<h3>Pro</h3>
+
+<div class="price">₹12,999</div>
+
+<p>5 Pages</p>
+<p>Admin Panel</p>
+<p>4 Month Support</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="process">
+
+<div class="container">
+
+<h2>How It Works</h2>
+
+<div class="trust-grid">
+
+<div class="trust-box">1. Share Your Idea</div>
+<div class="trust-box">2. We Design Website</div>
+<div class="trust-box">3. You Approve</div>
+<div class="trust-box">4. Website Goes Live</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<div class="container">
+
+<h2>Ready To Launch Your Website?</h2>
+
+<a class="btn" href="https://www.instagram.com/rema.iningamount/" target="_blank">
+Message Us On Instagram
+</a>
+
+</div>
+
+</section>
+
+<footer>
+
+Moonstore © 2026
+
+</footer>
+
+<div class="float">
+
+<a class="ig" href="https://www.instagram.com/rema.iningamount/" target="_blank">
+Instagram
+</a>
+
+</div>
+
+<script>
+
+function toggleMenu(){
+document.getElementById("nav").classList.toggle("active");
+}
+
+</script>
+
+</body>
+  </html>
