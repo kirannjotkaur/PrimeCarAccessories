@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prime Car Accessories — Drive With Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #e8192c;
+  --red-dark: #a00f1c;
+  --red-glow: rgba(232,25,44,0.25);
+  --black: #060606;
+  --surface: #0e0e0e;
+  --card: #141414;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0f0f0;
+  --muted: #888;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:9999;
+  opacity:0.6;
+}
+
+/* ── CURSOR ── */
+.cursor {
+  position:fixed; width:10px; height:10px;
+  background:var(--red); border-radius:50%;
+  pointer-events:none; z-index:10000;
+  transform:translate(-50%,-50%);
+  transition:transform 0.1s, width 0.3s, height 0.3s, opacity 0.3s;
+  mix-blend-mode:difference;
+}
+.cursor-ring {
+  position:fixed; width:36px; height:36px;
+  border:1.5px solid rgba(232,25,44,0.5); border-radius:50%;
+  pointer-events:none; z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position:fixed; top:0; width:100%;
+  padding:18px 60px;
+  display:flex; justify-content:space-between; align-items:center;
+  z-index:1000;
+  background: linear-gradient(to bottom, rgba(6,6,6,0.95) 0%, rgba(6,6,6,0) 100%);
+  transition: background 0.4s;
+}
+nav.scrolled {
+  background: rgba(6,6,6,0.97) !important;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+}
+.logo {
+  font-family:'Barlow Condensed', sans-serif;
+  font-weight:900; font-size:26px; letter-spacing:1px;
+  color:#fff;
+}
+.logo span { color:var(--red); }
+
+.nav-links { display:flex; gap:35px; list-style:none; }
+.nav-links a {
+  text-decoration:none; color:var(--muted);
+  font-size:13px; font-weight:500; letter-spacing:0.5px; text-transform:uppercase;
+  transition:color 0.3s;
+  position:relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0;
+  width:0; height:1.5px; background:var(--red);
+  transition:width 0.3s;
+}
+.nav-links a:hover { color:#fff; }
+.nav-links a:hover::after { width:100%; }
+
+.nav-cta {
+  background:var(--red); color:#fff !important;
+  padding:9px 22px; border-radius:4px;
+  font-size:12px !important; letter-spacing:1px !important;
+  transition:background 0.3s, transform 0.2s !important;
+}
+.nav-cta:hover { background:var(--red-dark) !important; transform:translateY(-1px); }
+.nav-cta::after { display:none !important; }
+
+/* ── HERO ── */
+.hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column;
+  justify-content:center; align-items:flex-start;
+  padding:0 60px;
+  overflow:hidden;
+}
+
+.hero-bg {
+  position:absolute; inset:0;
+  background:url('https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+  filter:brightness(0.28) saturate(0.5);
+  transform:scale(1.05);
+  animation:heroZoom 12s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform:scale(1.05); }
+  to   { transform:scale(1.12); }
+}
+
+.hero-overlay {
+  position:absolute; inset:0;
+  background: linear-gradient(105deg, rgba(6,6,6,0.92) 40%, rgba(6,6,6,0.3) 100%);
+}
+
+.hero-line {
+  position:absolute; top:0; left:60px;
+  width:2px; height:100%;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  opacity:0.4;
+}
+
+.hero-content { position:relative; z-index:1; max-width:680px; }
+
+.hero-tag {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--red); margin-bottom:24px;
+  opacity:0; animation:fadeUp 0.8s 0.2s forwards;
+}
+.hero-tag::before {
+  content:''; display:block; width:30px; height:1.5px; background:var(--red);
+}
+
+.hero h1 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:clamp(64px, 9vw, 130px);
+  font-weight:900; line-height:0.9;
+  letter-spacing:-2px;
+  text-transform:uppercase;
+  opacity:0; animation:fadeUp 0.8s 0.4s forwards;
+}
+.hero h1 em { color:var(--red); font-style:normal; }
+
+.hero-sub {
+  margin-top:28px; max-width:460px;
+  color:#999; font-size:15px; line-height:1.7; font-weight:300;
+  opacity:0; animation:fadeUp 0.8s 0.6s forwards;
+}
+
+.hero-actions {
+  display:flex; gap:16px; margin-top:40px; align-items:center;
+  opacity:0; animation:fadeUp 0.8s 0.8s forwards;
+}
+
+.btn-primary {
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--red); color:#fff;
+  padding:16px 34px; border-radius:4px;
+  text-decoration:none; font-weight:500; font-size:14px;
+  letter-spacing:0.5px;
+  transition:background 0.3s, transform 0.25s, box-shadow 0.3s;
+  box-shadow:0 0 0 rgba(232,25,44,0);
+}
+.btn-primary:hover {
+  background:var(--red-dark); transform:translateY(-2px);
+  box-shadow:0 8px 30px var(--red-glow);
+}
+.btn-primary svg { transition:transform 0.3s; }
+.btn-primary:hover svg { transform:translateX(4px); }
+
+.btn-ghost {
+  display:inline-flex; align-items:center; gap:8px;
+  color:#ccc; text-decoration:none; font-size:14px; font-weight:400;
+  transition:color 0.3s;
+}
+.btn-ghost:hover { color:#fff; }
+
+.hero-stats {
+  position:absolute; bottom:60px; right:60px; z-index:1;
+  display:flex; gap:40px;
+  opacity:0; animation:fadeUp 0.8s 1s forwards;
+}
+.stat-item { text-align:right; }
+.stat-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:44px; font-weight:900; color:#fff; line-height:1;
+}
+.stat-num span { color:var(--red); }
+.stat-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); }
+
+.hero-scroll {
+  position:absolute; bottom:60px; left:60px; z-index:1;
+  display:flex; align-items:center; gap:12px;
+  font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--muted);
+  opacity:0; animation:fadeUp 0.8s 1.2s forwards;
+}
+.scroll-line {
+  width:40px; height:1px; background:var(--muted);
+  position:relative; overflow:hidden;
+}
+.scroll-line::after {
+  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background:var(--red);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%   { left:-100%; }
+  100% { left:100%; }
+}
+
+/* ── SECTION BASE ── */
+section { padding:100px 60px; }
+.section-eyebrow {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; letter-spacing:3px; text-transform:uppercase;
+  color:var(--red); margin-bottom:16px;
+}
+.section-eyebrow::before {
+  content:''; width:24px; height:1.5px; background:var(--red);
+}
+.section-title {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:clamp(40px,5vw,70px); font-weight:900;
+  text-transform:uppercase; line-height:1;
+  letter-spacing:-1px;
+}
+
+/* ── SERVICES ── */
+#services { background:var(--surface); }
+.services-header {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  margin-bottom:60px; flex-wrap:wrap; gap:20px;
+}
+.services-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:2px;
+}
+
+.service-card {
+  background:var(--card);
+  padding:40px 36px;
+  position:relative; overflow:hidden;
+  transition:background 0.4s;
+  cursor:default;
+}
+.service-card::before {
+  content:''; position:absolute; bottom:0; left:0;
+  width:0; height:3px; background:var(--red);
+  transition:width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.service-card:hover { background:#1a1a1a; }
+.service-card:hover::before { width:100%; }
+
+.card-num {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:13px; letter-spacing:2px; color:var(--red);
+  margin-bottom:28px; opacity:0.7;
+}
+.service-icon {
+  width:52px; height:52px; margin-bottom:24px;
+  border:1.5px solid var(--border); border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:24px;
+  transition:border-color 0.4s, background 0.4s;
+}
+.service-card:hover .service-icon {
+  border-color:var(--red-glow);
+  background:rgba(232,25,44,0.08);
+}
+.service-card h3 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:26px; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.5px; margin-bottom:12px; color:#fff;
+}
+.service-card p { color:var(--muted); font-size:14px; line-height:1.7; margin-bottom:24px; }
+.service-link {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:13px; font-weight:500; color:var(--red);
+  text-decoration:none; letter-spacing:0.5px;
+  transition:gap 0.3s;
+}
+.service-link:hover { gap:10px; }
+
+/* ── ABOUT / WHY US ── */
+#about { background:var(--black); }
+.about-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+}
+.about-img-wrap {
+  position:relative;
+}
+.about-img {
+  width:100%; aspect-ratio:4/5; object-fit:cover; border-radius:4px;
+  filter:brightness(0.85) saturate(0.8);
+}
+.about-badge {
+  position:absolute; bottom:-30px; right:-30px;
+  background:var(--red); color:#fff;
+  width:120px; height:120px; border-radius:50%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center;
+}
+.about-badge strong {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:40px; font-weight:900; line-height:1;
+}
+.about-badge span { font-size:10px; letter-spacing:1px; text-transform:uppercase; }
+
+.about-text { padding:20px 0; }
+.about-text p {
+  color:#999; font-size:15px; line-height:1.9; margin-bottom:24px; font-weight:300;
+}
+.about-features { margin-top:40px; display:flex; flex-direction:column; gap:16px; }
+.feature-row {
+  display:flex; align-items:center; gap:16px;
+  padding:16px 20px; border:1px solid var(--border); border-radius:4px;
+  transition:border-color 0.3s, background 0.3s;
+}
+.feature-row:hover { border-color:rgba(232,25,44,0.3); background:rgba(232,25,44,0.04); }
+.feature-dot {
+  width:8px; height:8px; border-radius:50%; background:var(--red); flex-shrink:0;
+}
+.feature-row span { font-size:14px; color:#ccc; }
+
+/* ── GALLERY ── */
+#gallery { background:var(--surface); }
+.gallery-header { margin-bottom:50px; }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:8px;
+}
+.g-item { overflow:hidden; position:relative; }
+.g-item img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.6s cubic-bezier(0.4,0,0.2,1), filter 0.4s;
+  filter:brightness(0.85) saturate(0.7);
+  display:block;
+}
+.g-item:hover img { transform:scale(1.06); filter:brightness(1) saturate(1); }
+.g-item:first-child { grid-row:1/3; min-height:500px; }
+.g-item:not(:first-child) { min-height:246px; }
+
+.g-overlay {
+  position:absolute; inset:0; background:rgba(0,0,0,0);
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.4s;
+}
+.g-item:hover .g-overlay { background:rgba(232,25,44,0.1); }
+
+/* ── TESTIMONIAL ── */
+#testimonials { background:var(--black); }
+.testi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:24px; margin-top:60px; }
+.testi-card {
+  background:var(--card); border:1px solid var(--border);
+  padding:32px; border-radius:4px;
+  transition:border-color 0.3s, transform 0.3s;
+}
+.testi-card:hover { border-color:rgba(232,25,44,0.3); transform:translateY(-4px); }
+.stars { color:var(--red); font-size:13px; letter-spacing:2px; margin-bottom:16px; }
+.testi-card p { color:#999; font-size:14px; line-height:1.8; margin-bottom:24px; font-style:italic; }
+.testi-author { display:flex; align-items:center; gap:12px; }
+.testi-avatar {
+  width:42px; height:42px; border-radius:50%;
+  background:linear-gradient(135deg,var(--red),var(--red-dark));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:18px;
+}
+.testi-name { font-weight:500; font-size:14px; }
+.testi-loc { font-size:12px; color:var(--muted); }
+
+/* ── CONTACT ── */
+#contact {
+  background:var(--surface);
+  position:relative; overflow:hidden;
+}
+#contact::before {
+  content:''; position:absolute; top:-150px; right:-150px;
+  width:500px; height:500px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,25,44,0.08) 0%, transparent 70%);
+  pointer-events:none;
+}
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
+.contact-info { padding-top:20px; }
+.contact-info p { color:#999; font-size:15px; line-height:1.8; margin:20px 0 40px; font-weight:300; }
+.contact-details { display:flex; flex-direction:column; gap:20px; }
+.contact-row {
+  display:flex; align-items:center; gap:16px;
+  padding:18px 22px; background:var(--card); border:1px solid var(--border); border-radius:4px;
+}
+.contact-icon {
+  width:40px; height:40px; border-radius:4px;
+  background:rgba(232,25,44,0.1); color:var(--red);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.contact-text-label { font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--muted); }
+.contact-text-val { font-size:15px; font-weight:500; }
+
+.contact-cta-box {
+  background:var(--red);
+  padding:50px 44px; border-radius:4px;
+}
+.contact-cta-box h3 {
+  font-family:'Barlow Condensed', sans-serif;
+  font-size:44px; font-weight:900; text-transform:uppercase;
+  line-height:1; margin-bottom:16px;
+}
+.contact-cta-box p { font-size:15px; line-height:1.7; margin-bottom:32px; opacity:0.85; }
+.btn-white {
+  display:inline-flex; align-items:center; gap:10px;
+  background:#fff; color:#111;
+  padding:16px 32px; border-radius:4px;
+  text-decoration:none; font-weight:600; font-size:14px;
+  transition:transform 0.3s, box-shadow 0.3s;
+}
+.btn-white:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+.btn-white svg { transition:transform 0.3s; }
+.btn-white:hover svg { transform:translateX(4px); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--black); padding:30px 60px;
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:16px;
+}
+.footer-logo {
+  font-family:'Barlow Condensed', sans-serif;
+  font-weight:900; font-size:22px; letter-spacing:1px;
+}
+.footer-logo span { color:var(--red); }
+footer p { color:var(--muted); font-size:13px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(30px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+  opacity:0; transform:translateY(30px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px) {
+  nav { padding:16px 24px; }
+  .nav-links { display:none; }
+  .hero { padding:0 24px; }
+  .hero-stats { right:24px; gap:24px; }
+  .hero-scroll { left:24px; }
+  section { padding:70px 24px; }
+  .about-grid, .contact-grid { grid-template-columns:1fr; gap:40px; }
+  .about-badge { right:0; bottom:-20px; width:90px; height:90px; }
+  .about-badge strong { font-size:28px; }
+  .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .g-item:first-child { grid-column:1/3; min-height:300px; }
+  footer { padding:24px; flex-direction:column; text-align:center; }
+  .services-header { flex-direction:column; align-items:flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="logo">Prime<span>Car</span></div>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://wa.me/919596850672" class="nav-cta">WhatsApp Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-line"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Premium Car Accessories</div>
+    <h1>Drive With<br><em>Style</em></h1>
+    <p class="hero-sub">Professional upgrades, premium accessories & expert installation — built for drivers who demand the best.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/919596850672" class="btn-primary">
+        Book on WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#services" class="btn-ghost">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12l4 4 4-4"/></svg>
+        Explore Services
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">500<span>+</span></div>
+      <div class="stat-label">Cars Upgraded</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5<span>★</span></div>
+      <div class="stat-label">Customer Rating</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <a href="https://wa.me/919596850672" class="btn-primary" style="padding:14px 28px;font-size:13px;">
+      Get Free Quote
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="card-num">01</div>
+      <div class="service-icon">🛞</div>
+      <h3>Custom Wheels</h3>
+      <p>Premium alloy wheels and performance tire upgrades tailored to your vehicle's style and handling needs.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-num">02</div>
+      <div class="service-icon">💡</div>
+      <h3>Lighting Upgrades</h3>
+      <p>LED, HID, DRL & ambient lighting systems installed professionally for maximum impact and visibility.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-num">03</div>
+      <div class="service-icon">🪑</div>
+      <h3>Interior Customization</h3>
+      <p>Luxury seat covers, custom floor mats, dashboard trims and full interior redesigns for every taste.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-num">04</div>
+      <div class="service-icon">✨</div>
+      <h3>Car Detailing</h3>
+      <p>Expert paint correction, ceramic coating, polishing and full exterior protection treatments.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-num">05</div>
+      <div class="service-icon">🔊</div>
+      <h3>Audio Systems</h3>
+      <p>High-fidelity car audio installation including subwoofers, amplifiers and premium speaker setups.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+    <div class="service-card reveal">
+      <div class="card-num">06</div>
+      <div class="service-icon">🛡️</div>
+      <h3>Paint Protection</h3>
+      <p>PPF, vinyl wraps and paint protection films to keep your car's finish flawless year after year.</p>
+      <a href="https://wa.me/919596850672" class="service-link">Get Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap reveal">
+      <img class="about-img" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Car detailing">
+      <div class="about-badge">
+        <strong>10+</strong>
+        <span>Years of Experience</span>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <div class="section-eyebrow">About Us</div>
+      <h2 class="section-title">Why Choose Prime Car?</h2>
+      <p style="margin-top:24px;">At Prime Car Accessories, we believe your vehicle should be an extension of your personality. We combine craftsmanship with quality parts to deliver results that genuinely turn heads.</p>
+      <p>Every job is handled by trained professionals who care about precision and finish — not just getting it done fast.</p>
+      <div class="about-features">
+        <div class="feature-row"><div class="feature-dot"></div><span>Genuine & premium quality parts only</span></div>
+        <div class="feature-row"><div class="feature-dot"></div><span>Professional installation by trained technicians</span></div>
+        <div class="feature-row"><div class="feature-dot"></div><span>Transparent pricing — no hidden charges</span></div>
+        <div class="feature-row"><div class="feature-dot"></div><span>Post-service support & warranty on workmanship</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header reveal">
+    <div class="section-eyebrow">Our Work</div>
+    <h2 class="section-title">Gallery</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80" alt="Car">
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=600&q=80" alt="Car">
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1511910849309-0dffb3a9b8e7?auto=format&fit=crop&w=600&q=80" alt="Car interior">
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=600&q=80" alt="Car">
+      <div class="g-overlay"></div>
+    </div>
+    <div class="g-item reveal">
+      <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?auto=format&fit=crop&w=600&q=80" alt="Car wheels">
+      <div class="g-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <div class="section-eyebrow">Client Reviews</div>
+    <h2 class="section-title">What Our Customers Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Got my alloy wheels and ambient lighting done here. The quality is unmatched and the team was super professional. My car looks completely transformed!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rahul Sharma</div>
+          <div class="testi-loc">Jammu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Ceramic coating service was top-notch. Took their time and delivered a mirror-like finish. Highly recommend Prime Car to anyone serious about their car."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Arjun Verma</div>
+          <div class="testi-loc">Jammu</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"Best car accessories shop in Jammu. Got my interior done and I get compliments every single day. Lakhwinder bhai is very knowledgeable and honest."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">S</div>
+        <div>
+          <div class="testi-name">Sahil Gupta</div>
+          <div class="testi-loc">Jammu</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title">Let's Upgrade Your Ride</h2>
+      <p>Have a question or ready to book? Reach us directly on WhatsApp for a quick response and free consultation.</p>
+      <div class="contact-details">
+        <div class="contact-row">
+          <div class="contact-icon">👤</div>
+          <div>
+            <div class="contact-text-label">Owner</div>
+            <div class="contact-text-val">Lakhwinder Singh (Happy)</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-text-label">Call / WhatsApp</div>
+            <div class="contact-text-val">+91 95968 50672</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">🕐</div>
+          <div>
+            <div class="contact-text-label">Working Hours</div>
+            <div class="contact-text-val">Mon – Sat, 9:00 AM – 7:00 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-cta-box reveal">
+      <h3>Ready to Transform Your Car?</h3>
+      <p>Message us on WhatsApp and get a free quote within minutes. Our team is ready to help you build your dream ride.</p>
+      <a href="https://wa.me/919596850672" class="btn-white">
+        Message on WhatsApp
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Prime<span>Car</span> Accessories</div>
+  <p>© 2026 Prime Car Accessories. All Rights Reserved.</p>
+  <p style="font-size:12px;">Made with ❤️ for car enthusiasts in Jammu</p>
+</footer>
+
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+function animateRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.transform='translate(-50%,-50%) scale(2)'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.transform='translate(-50%,-50%) scale(1)'; });
+});
+
+// Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
